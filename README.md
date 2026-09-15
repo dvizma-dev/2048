@@ -34,5 +34,11 @@ You can find the same information in the [contributing guide.](https://github.co
 ## License
 2048 is licensed under the [MIT license.](https://github.com/gabrielecirulli/2048/blob/master/LICENSE.txt)
 
+## Workshop fork
+
+This fork adds a selectable winning target with 512, 1024, and 2048 options. The original 2048 target remains the default. It also adds a Jaipur-inspired visual theme while preserving the original game layout and controls.
+
+Run `npm test` for the dependency-free Node test suite. Run `npm run serve` and open `http://127.0.0.1:4173` for the manual browser check. Repository guidance and architecture notes are in `AGENTS.md` and `docs/`.
+
 ## Donations
 I made this in my spare time, and it's hosted on GitHub (which means I don't have any hosting costs), but if you enjoyed the game and feel like buying me coffee, you can donate at my BTC address: `1Ec6onfsQmoP9kkL3zkpB6c5sA4PVcXU2i`. Thank you very much!

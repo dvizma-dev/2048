@@ -21,6 +21,7 @@ window.fakeStorage = {
 function LocalStorageManager() {
   this.bestScoreKey     = "bestScore";
   this.gameStateKey     = "gameState";
+  this.winningTargetKey = "winningTarget";
 
   var supported = this.localStorageSupported();
   this.storage = supported ? window.localStorage : window.fakeStorage;
@@ -60,4 +61,16 @@ LocalStorageManager.prototype.setGameState = function (gameState) {
 
 LocalStorageManager.prototype.clearGameState = function () {
   this.storage.removeItem(this.gameStateKey);
+};
+
+LocalStorageManager.prototype.getWinningTarget = function () {
+  var storedTarget = Number(this.storage.getItem(this.winningTargetKey));
+  return [512, 1024, 2048].indexOf(storedTarget) !== -1 ? storedTarget : 2048;
+};
+
+LocalStorageManager.prototype.setWinningTarget = function (target) {
+  if ([512, 1024, 2048].indexOf(target) === -1) return false;
+
+  this.storage.setItem(this.winningTargetKey, target);
+  return true;
 };

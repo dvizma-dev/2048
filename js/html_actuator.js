@@ -3,6 +3,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.winningTarget     = 2048;
 
   this.score = 0;
 }
@@ -11,6 +12,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
   var self = this;
 
   window.requestAnimationFrame(function () {
+    self.winningTarget = metadata.winningTarget || 2048;
     self.clearContainer(self.tileContainer);
 
     grid.cells.forEach(function (column) {
@@ -57,7 +59,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
-  if (tile.value > 2048) classes.push("tile-super");
+  if (tile.value > this.winningTarget) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
 
