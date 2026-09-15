@@ -5,6 +5,15 @@ Made just for fun. [Play it here!](http://gabrielecirulli.github.io/2048/)
 
 The official app can also be found on the [Play Store](https://play.google.com/store/apps/details?id=com.gabrielecirulli.app2048) and [App Store!](https://itunes.apple.com/us/app/2048-by-gabriele-cirulli/id868076805)
 
+## This branch
+
+This branch keeps the original 4x4 gameplay and adds a selectable winning
+target. Players can choose `512`, `1024`, or `2048`; `2048` remains the default.
+
+It also applies a Jaipur-inspired visual theme with cream and sandstone
+surfaces, maroon and indigo controls, subtle block-print texture, arch details,
+and a deep blue-pottery `2` tile with warm cream text.
+
 ### Contributions
 
 [Anna Harren](https://github.com/iirelu/) and [sigod](https://github.com/sigod) are maintainers for this repository.
@@ -30,6 +39,15 @@ That screenshot is fake, by the way. I never reached 2048 :smile:
 Changes and improvements are more than welcome! Feel free to fork and open a pull request. Please make your changes in a specific branch and request to pull into `master`! If you can, please make sure the game fully works before sending the PR, as that will help speed up the process.
 
 You can find the same information in the [contributing guide.](https://github.com/gabrielecirulli/2048/blob/master/CONTRIBUTING.md)
+
+For local setup, architecture notes, testing, and safe-change guidance, see:
+
+ - [Setup](docs/setup.md)
+ - [Visual guide](docs/visual-guide.md)
+ - [Architecture](docs/architecture.md)
+ - [Testing](docs/testing.md)
+ - [Safe changes](docs/safe-changes.md)
+ - [Final review notes](docs/final-review.md)
 
 ## License
 2048 is licensed under the [MIT license.](https://github.com/gabrielecirulli/2048/blob/master/LICENSE.txt)
