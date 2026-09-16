@@ -10,9 +10,11 @@ The official app can also be found on the [Play Store](https://play.google.com/s
 This branch keeps the original 4x4 gameplay and adds a selectable winning
 target. Players can choose `512`, `1024`, or `2048`; `2048` remains the default.
 
-It also applies a Jaipur-inspired visual theme with cream and sandstone
-surfaces, maroon and indigo controls, subtle block-print texture, arch details,
-and a deep blue-pottery `2` tile with warm cream text.
+It also applies an intricate Jaipur-inspired visual theme with cream and
+sandstone surfaces, maroon and indigo controls, block-print and jaali texture,
+jharokha-style side panels, scalloped arch details, and a deep blue-pottery `2`
+tile with warm cream text. Decorative layers are kept below the grid and tile
+layers so the game remains readable.
 
 ### Contributions
 
