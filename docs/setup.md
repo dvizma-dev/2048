@@ -50,8 +50,8 @@ division, global built-in functions such as `ceil` and `floor`, and
 
 - `docs/visual-guide.md` shows the project structure and runtime flow with
   diagrams.
-- `docs/jaipur-theme-template.md` defines a reusable visual theme template for
-  the applied Jaipur-inspired theme.
+- `docs/au-bank-theme-template.md` defines the reusable visual theme template
+  for the applied AU Bank-inspired theme.
 - `docs/final-review.md` records the latest final verification, security
   review, and PR-style review results.
 - `index.html` defines the board markup and script load order.
