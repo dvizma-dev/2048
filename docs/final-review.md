@@ -11,13 +11,14 @@ docs.
 - Changing the target stores the selected value and starts a fresh game.
 - Saved games include `winningTarget`; invalid restored targets fall back to
   `2048`.
-- The intricate Jaipur-inspired theme is applied through `style/main.scss` and
+- The AU Bank-inspired theme is applied through `style/main.scss` and
   `style/main.css`.
-- The theme uses CSS-only jharokha side panels, arch friezes, scalloped board
-  details, jaali and block-print texture, and blue-pottery accents.
+- The theme uses CSS-only sun-ring side panels, orange and purple progress
+  bands, a deep purple board surface, orange action rails, and rising-sun board
+  accents.
 - Board decoration is isolated below gameplay layers so tiles remain visible.
-- The `2` tile uses deep blue-pottery blue, `#0f5f83`, with warm cream text,
-  `#fffaf0`.
+- The `2` tile uses strong AU Bank orange, `#b93812`, with high-contrast white
+  text, `#ffffff`.
 
 ## Exact verification commands
 
@@ -34,27 +35,32 @@ curl -I http://127.0.0.1:8000/style/main.css
 
 Stop the local server with `Ctrl-C` when the HTTP checks are done.
 
-## Browser checks performed
+## Browser, static, and CSS checks performed
 
-The final browser and static-serving checks confirmed:
+The final demo Chrome profile validation confirmed:
+
+- The `1024` and `2048` targets selected correctly.
+- Moves updated the score.
+- Orange `2` tiles were visible.
+- The `2048` target persisted after reload.
+
+The final static-serving and generated-CSS checks confirmed:
 
 - `/` responds with `HTTP/1.0 200 OK`.
 - `/style/main.css` responds with `HTTP/1.0 200 OK`.
-- The rendered game was visually checked after the Jaipur theme update.
-- The blue-pottery `2` tile was visually checked in the finished game.
-- The `2` tile contrast was checked as `6.76:1` for `#0f5f83` on `#fffaf0`.
+- The `2` tile contrast was checked as `5.77:1` for `#b93812` on `#ffffff`.
 - The stacking regression where decorative board layers covered tiles was fixed
   in Sass and regenerated CSS.
 - Generated CSS was checked for the expected stacking order: board
   pseudo-elements at `z-index: 0`, grid at `10`, tiles at `100`, `.tile-inner`
   at `101`, and messages at `1000`.
-- Generated CSS was checked to preserve the blue `2` tile and narrow-screen
-  values: `#0f5f83`, `280px` board, and `58px` tile line-height.
+- Generated CSS was checked to preserve the orange `2` tile and narrow-screen
+  values: `#b93812`, `280px` board, and `58px` tile line-height.
 
-Headless Chrome automation was attempted during review but exited with code
-`134` in this local environment. A temporary `npx playwright --version` attempt
-did not complete and was stopped. Those attempts were not counted as passing
-browser automation checks.
+The repository-local Playwright screenshot client was attempted after the AU
+Bank theme update, but it could not run because the `playwright` package is not
+installed in this environment. That attempt is not counted as passing browser
+automation; the Chrome-profile validation above was manual demo validation.
 
 ## Codex Security result
 
@@ -84,15 +90,14 @@ The PR-style review found and fixed three in-scope issues:
   the mobile media block. The mixin now accepts explicit field parameters, and
   the mobile include passes the `280px` board, `10px` spacing, and `58px` tile
   values.
-- The Jaipur theme template still described the old cream `2` tile. It now
-  matches the applied blue-pottery `2` tile.
+- The theme template is now `docs/au-bank-theme-template.md` and matches the
+  applied AU Bank orange `2` tile.
 
 ## Theme stacking fix
 
-Later browser validation found that the new decorative board layer could
-visually cover tiles even though tile text still existed in the DOM. The fix
-keeps the intricate Jaipur decoration but makes the board an isolated stacking
-context:
+Later browser validation found that a decorative board layer could visually
+cover tiles even though tile text still existed in the DOM. The fix is retained
+in the AU Bank theme by making the board an isolated stacking context:
 
 - `.game-container` uses `isolation: isolate` and local `z-index: 0`.
 - `.game-container:before` and `.game-container:after` remain decorative at
