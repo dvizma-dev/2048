@@ -14,18 +14,15 @@ Original prompt: Implement the approved plan.
   docs for the new target selector and storage behavior.
 - Added a selector event-binding test so the target dropdown path is covered
   without browser dependencies.
-- Added `docs/jaipur-theme-template.md` as a reusable design reference only;
-  no game code or styles were changed for the theme.
-- Applied the Jaipur-inspired theme in `style/main.scss` and mirrored the
-  generated CSS changes in `style/main.css` while keeping board/layout
-  dimensions unchanged.
-- Adjusted the applied tile palette for contrast: `16` uses dark text, `32`
-  uses deeper pink, and `1024` uses deep blue-pottery.
-- Changed only the `2` tile treatment to deep blue-pottery blue with warm cream
-  numerals.
-- Re-applied the Jaipur theme as a more intricate style-only pass with
-  jharokha-style side panels, arch friezes, jaali and block-print texture,
-  scalloped board details, and blue-pottery accents.
+- Earlier regional theme work was superseded by the AU Bank theme request; the
+  old theme guide was removed from active docs.
 - Fixed the decorative board stacking regression by isolating the board
   stacking context and keeping grid, tiles, tile text, and game messages above
   pseudo-element decoration.
+- Replaced the theme with an AU Bank-inspired visual system in
+  `style/main.scss`: orange and purple palette, rising-sun accents, progress
+  bands, banking-style score panels, and a strong orange `2` tile with white
+  numerals.
+- Replaced the old regional theme document with
+  `docs/au-bank-theme-template.md` and updated active project docs so the AU
+  Bank visual system is the documented final theme.
