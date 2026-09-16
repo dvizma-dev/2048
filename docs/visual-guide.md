@@ -208,6 +208,23 @@ flowchart LR
 says to edit Sass sources in `style/` and regenerate CSS instead of hand-editing
 `style/main.css` alone.
 
+The Jaipur theme is layered in CSS:
+
+```text
+body pseudo-elements          desktop jharokha side panels
+container pseudo-element      small arch frieze above the game
+game-container background     sandstone, jaali, and block-print texture
+game-container pseudo-layers  board arch and blue-pottery bottom detail
+grid-container                empty board cells
+tile-container                moving tiles and tile numbers
+game-message                  win and game-over overlays
+```
+
+The board uses `isolation: isolate` so z-index values stay local. Decorative
+board pseudo-elements are below the grid and tiles; they must never cover tile
+text. The generated CSS keeps mobile decorative side panels disabled and keeps
+the narrow board at `280px`.
+
 ## Test boundary
 
 ```mermaid
