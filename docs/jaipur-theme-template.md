@@ -7,8 +7,9 @@ browser-loaded `style/main.css`.
 ## Theme goal
 
 Create a warm Pink City version of the game that still feels quick to scan and
-easy to play. The board should suggest Jaipur through sandstone surfaces, cream
-paper-like backgrounds, maroon and indigo accents, cusped arch shapes, subtle
+easy to play. The board should be unmistakably Jaipur through sandstone
+surfaces, cream paper-like backgrounds, maroon and indigo accents,
+jharokha-style side panels, cusped arch shapes, jaali-inspired texture,
 block-print patterning, and small blue-pottery details.
 
 Keep the original gameplay untouched: same board size, movement, scoring,
@@ -165,27 +166,37 @@ screens.
 
 Use arches as shape language, not as heavy illustration. Good places:
 
+- desktop `body:before` and `body:after` side panels, where they can suggest
+  Hawa Mahal or jharokha windows without touching the playable board
+- `.container:before`, as a narrow arch frieze above the game
 - the top edge of `.game-container`
 - the `.game-message` overlay
 - a subtle frame around score panels
 
-Implementation sketch:
+Implementation sketch for board-level arches:
 
 ```scss
 .game-container:before {
   content: "";
   position: absolute;
-  inset: 8px 8px auto 8px;
-  height: 26px;
-  border: 2px solid rgba($jaipur-cream, .28);
+  top: 8px;
+  right: 8px;
+  left: 8px;
+  height: 44px;
+  border: 2px solid rgba($jaipur-white, .38);
   border-bottom: 0;
-  border-radius: 18px 18px 0 0;
+  border-radius: 28px 28px 0 0;
   pointer-events: none;
+  z-index: 0;
 }
 ```
 
 Keep arches behind or outside tile motion paths. They must not cover tiles,
 score additions, buttons, or messages.
+
+Disable the large desktop side panels inside the mobile media query so narrow
+screens keep the original compact layout and do not introduce horizontal
+overflow.
 
 ## Block-print patterns
 
@@ -217,6 +228,11 @@ For the board, use an even quieter pattern:
 
 Do not place pattern layers on `.tile-inner` unless they are nearly invisible.
 Tile values are the primary information.
+
+The final intricate theme uses several quiet layers at once: page block-print
+dots, board jaali texture, scalloped board arches, pale grid-cell arch marks,
+and low-opacity tile highlights. Keep each layer subtle enough that the tile
+number remains the visual foreground.
 
 ## Blue-pottery details
 
@@ -274,12 +290,48 @@ Keep decoration subordinate to the board:
 
 - No decoration may overlap a tile, tile number, score value, target selector,
   or restart control.
+- Board decoration must stay in lower stacking layers than `.grid-container`,
+  `.tile-container`, `.tile`, and `.tile-inner`.
+- Use `isolation: isolate` on `.game-container` when board pseudo-elements and
+  gameplay layers share the same stacking context.
 - No pattern should reduce tile-number contrast.
 - Avoid large illustrations, large ornamental borders, or animated decoration.
 - Keep border radii close to the current `3px` to `6px` system unless using an
   arch shape intentionally.
 - Use one or two decorative ideas at a time: arches plus subtle block print, or
   block print plus blue-pottery focus details.
+
+Current stacking reference:
+
+```scss
+.game-container {
+  isolation: isolate;
+  z-index: 0;
+}
+
+.game-container:before,
+.game-container:after {
+  z-index: 0;
+}
+
+.grid-container {
+  z-index: 10;
+}
+
+.tile,
+.tile-container {
+  z-index: 100;
+}
+
+.tile-inner {
+  position: relative;
+  z-index: 101;
+}
+
+.game-message {
+  z-index: 1000;
+}
+```
 
 ## Contrast checks
 
@@ -302,6 +354,7 @@ Verify the theme at widths at or below the existing `$mobile-threshold` of
   not overlap.
 - The board remains `280px` wide in the generated CSS.
 - Mobile tiles remain about `58px` square with `10px` spacing.
+- Desktop-only side jharokha panels are hidden.
 - Tile numbers `512`, `1024`, and `2048` fit without clipping.
 - The target selector is large enough to tap and shows the selected value.
 - Win and game-over overlays keep their text and buttons inside the board.
