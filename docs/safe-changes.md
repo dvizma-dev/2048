@@ -43,8 +43,8 @@ Sass so the browser sees the update.
 
 Do not hand-edit `style/main.css` as the only source of a style change.
 
-For a reusable Jaipur-inspired theme direction, use
-`docs/jaipur-theme-template.md` as the design reference before editing styles.
+For the reusable AU Bank-inspired theme direction, use
+`docs/au-bank-theme-template.md` as the design reference before editing styles.
 
 ## Final verification
 
