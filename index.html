@@ -27,8 +27,16 @@
     </div>
 
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
+      <p class="game-intro">Join the numbers and get to the target tile!</p>
+      <div class="game-controls">
+        <label class="target-label" for="target-selector">Target</label>
+        <select class="target-selector" id="target-selector">
+          <option value="512">512</option>
+          <option value="1024">1024</option>
+          <option value="2048" selected>2048</option>
+        </select>
+        <a class="restart-button">New Game</a>
+      </div>
     </div>
 
     <div class="game-container">

@@ -5,10 +5,12 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.actuator       = new Actuator;
 
   this.startTiles     = 2;
+  this.winningTarget  = this.storageManager.getWinningTarget();
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.inputManager.on("targetChange", this.setWinningTarget.bind(this));
 
   this.setup();
 }
@@ -24,6 +26,12 @@ GameManager.prototype.restart = function () {
 GameManager.prototype.keepPlaying = function () {
   this.keepPlaying = true;
   this.actuator.continueGame(); // Clear the game won/lost message
+};
+
+// Set a new winning target and start a fresh game
+GameManager.prototype.setWinningTarget = function (target) {
+  this.winningTarget = this.storageManager.setWinningTarget(target);
+  this.restart();
 };
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
@@ -43,6 +51,9 @@ GameManager.prototype.setup = function () {
     this.over        = previousState.over;
     this.won         = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
+    this.winningTarget = this.storageManager.setWinningTarget(
+      previousState.winningTarget || this.storageManager.getWinningTarget()
+    );
   } else {
     this.grid        = new Grid(this.size);
     this.score       = 0;
@@ -81,6 +92,10 @@ GameManager.prototype.actuate = function () {
     this.storageManager.setBestScore(this.score);
   }
 
+  if (this.inputManager.setWinningTarget) {
+    this.inputManager.setWinningTarget(this.winningTarget);
+  }
+
   // Clear the state when the game is over (game over only, not win)
   if (this.over) {
     this.storageManager.clearGameState();
@@ -93,6 +108,7 @@ GameManager.prototype.actuate = function () {
     over:       this.over,
     won:        this.won,
     bestScore:  this.storageManager.getBestScore(),
+    winningTarget: this.winningTarget,
     terminated: this.isGameTerminated()
   });
 
@@ -105,7 +121,8 @@ GameManager.prototype.serialize = function () {
     score:       this.score,
     over:        this.over,
     won:         this.won,
-    keepPlaying: this.keepPlaying
+    keepPlaying: this.keepPlaying,
+    winningTarget: this.winningTarget
   };
 };
 
@@ -166,8 +183,8 @@ GameManager.prototype.move = function (direction) {
           // Update the score
           self.score += merged.value;
 
-          // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+          // The configured target tile
+          if (merged.value === self.winningTarget) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
