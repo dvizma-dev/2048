@@ -11,8 +11,11 @@ docs.
 - Changing the target stores the selected value and starts a fresh game.
 - Saved games include `winningTarget`; invalid restored targets fall back to
   `2048`.
-- The Jaipur-inspired theme is applied through `style/main.scss` and
+- The intricate Jaipur-inspired theme is applied through `style/main.scss` and
   `style/main.css`.
+- The theme uses CSS-only jharokha side panels, arch friezes, scalloped board
+  details, jaali and block-print texture, and blue-pottery accents.
+- Board decoration is isolated below gameplay layers so tiles remain visible.
 - The `2` tile uses deep blue-pottery blue, `#0f5f83`, with warm cream text,
   `#fffaf0`.
 
@@ -40,6 +43,13 @@ The final browser and static-serving checks confirmed:
 - The rendered game was visually checked after the Jaipur theme update.
 - The blue-pottery `2` tile was visually checked in the finished game.
 - The `2` tile contrast was checked as `6.76:1` for `#0f5f83` on `#fffaf0`.
+- The stacking regression where decorative board layers covered tiles was fixed
+  in Sass and regenerated CSS.
+- Generated CSS was checked for the expected stacking order: board
+  pseudo-elements at `z-index: 0`, grid at `10`, tiles at `100`, `.tile-inner`
+  at `101`, and messages at `1000`.
+- Generated CSS was checked to preserve the blue `2` tile and narrow-screen
+  values: `#0f5f83`, `280px` board, and `58px` tile line-height.
 
 Headless Chrome automation was attempted during review but exited with code
 `134` in this local environment. A temporary `npx playwright --version` attempt
@@ -76,6 +86,22 @@ The PR-style review found and fixed three in-scope issues:
   values.
 - The Jaipur theme template still described the old cream `2` tile. It now
   matches the applied blue-pottery `2` tile.
+
+## Theme stacking fix
+
+Later browser validation found that the new decorative board layer could
+visually cover tiles even though tile text still existed in the DOM. The fix
+keeps the intricate Jaipur decoration but makes the board an isolated stacking
+context:
+
+- `.game-container` uses `isolation: isolate` and local `z-index: 0`.
+- `.game-container:before` and `.game-container:after` remain decorative at
+  `z-index: 0`.
+- `.grid-container` is above decoration at `z-index: 10`.
+- `.tile-container` and `.tile` are above the grid at `z-index: 100`.
+- `.tile-inner` is positioned at `z-index: 101` so tile numbers stay above tile
+  and board decoration.
+- `.game-message` remains the top layer at `z-index: 1000`.
 
 ## Known Sass warnings
 
