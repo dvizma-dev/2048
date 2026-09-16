@@ -15,6 +15,12 @@ $jaipur-saffron: #e7a928;
 $jaipur-henna: #8c4a2f;
 $jaipur-ink: #3f2a28;
 $jaipur-white: #fffaf0;
+$jaipur-shadow: rgba(#4d1b25, .18);
+$jaipur-arch-line: rgba($jaipur-white, .38);
+$jaipur-block-print: rgba($jaipur-maroon, .075);
+$jaipur-blue-detail: rgba($jaipur-blue-pottery, .35);
+$jaipur-arch-shadow: rgba($jaipur-maroon, .22);
+$jaipur-jaali-line: rgba($jaipur-white, .2);
 
 $field-width: 500px;
 $grid-spacing: 15px;
@@ -42,8 +48,12 @@ html, body {
 
   background-color: $jaipur-cream;
   background-image:
-    radial-gradient(circle at 1px 1px, rgba($jaipur-maroon, .08) 1px, transparent 0);
-  background-size: 18px 18px;
+    radial-gradient(circle at 1px 1px, $jaipur-block-print 1px, transparent 0),
+    radial-gradient(circle at 9px 9px, rgba($jaipur-sandstone-deep, .07) 1px, transparent 0),
+    linear-gradient(135deg, rgba($jaipur-pink, .08) 25%, transparent 25%),
+    linear-gradient(225deg, rgba($jaipur-blue-pottery, .035) 25%, transparent 25%);
+  background-position: 0 0, 0 0, 0 0, 9px 9px;
+  background-size: 18px 18px, 18px 18px, 36px 36px, 36px 36px;
   color: $text-color;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
@@ -51,18 +61,80 @@ html, body {
 
 body {
   margin: 80px 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+
+  &:before,
+  &:after {
+    content: "";
+    position: fixed;
+    top: 38px;
+    bottom: 38px;
+    width: 136px;
+    opacity: .34;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:before {
+    left: max(24px, calc(50% - 470px));
+    background-image:
+      radial-gradient(ellipse 28px 38px at 34px 46px, transparent 58%, $jaipur-arch-shadow 60%, transparent 63%),
+      radial-gradient(ellipse 28px 38px at 102px 46px, transparent 58%, $jaipur-arch-shadow 60%, transparent 63%),
+      radial-gradient(circle at 34px 42px, $jaipur-blue-detail 3px, transparent 4px),
+      radial-gradient(circle at 102px 42px, rgba($jaipur-saffron, .26) 3px, transparent 4px),
+      linear-gradient(90deg, transparent 48%, rgba($jaipur-maroon, .16) 48%, rgba($jaipur-maroon, .16) 52%, transparent 52%),
+      linear-gradient(180deg, rgba($jaipur-pink, .16), rgba($jaipur-sandstone, .08));
+    background-size: 136px 92px, 136px 92px, 136px 92px, 136px 92px, 34px 34px, 100% 100%;
+    border-left: 1px solid rgba($jaipur-maroon, .14);
+    border-right: 1px solid rgba($jaipur-white, .28);
+  }
+
+  &:after {
+    right: max(24px, calc(50% - 470px));
+    background-image:
+      radial-gradient(ellipse 28px 38px at 34px 46px, transparent 58%, rgba($jaipur-indigo, .18) 60%, transparent 63%),
+      radial-gradient(ellipse 28px 38px at 102px 46px, transparent 58%, $jaipur-arch-shadow 60%, transparent 63%),
+      radial-gradient(circle at 34px 42px, rgba($jaipur-saffron, .26) 3px, transparent 4px),
+      radial-gradient(circle at 102px 42px, $jaipur-blue-detail 3px, transparent 4px),
+      linear-gradient(90deg, transparent 48%, rgba($jaipur-maroon, .16) 48%, rgba($jaipur-maroon, .16) 52%, transparent 52%),
+      linear-gradient(180deg, rgba($jaipur-blue-pottery, .08), rgba($jaipur-pink, .13));
+    background-size: 136px 92px, 136px 92px, 136px 92px, 136px 92px, 34px 34px, 100% 100%;
+    border-left: 1px solid rgba($jaipur-white, .28);
+    border-right: 1px solid rgba($jaipur-maroon, .14);
+  }
 }
 
 .heading {
   @include clearfix;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -18px;
+    left: 0;
+    height: 10px;
+    background-image:
+      radial-gradient(ellipse 12px 9px at 12px 10px, transparent 48%, rgba($jaipur-maroon, .32) 50%, transparent 56%),
+      radial-gradient(circle at 12px 5px, $jaipur-blue-detail 2px, transparent 3px);
+    background-size: 24px 10px;
+    pointer-events: none;
+  }
 }
 
 h1.title {
+  color: $jaipur-maroon;
   font-size: 80px;
   font-weight: bold;
   margin: 0;
   display: block;
   float: left;
+  text-shadow:
+    0 2px 0 rgba($jaipur-white, .55),
+    0 8px 18px rgba($jaipur-maroon, .16);
 }
 
 @include keyframes(move-up) {
@@ -87,8 +159,17 @@ h1.title {
 
   position: relative;
   display: inline-block;
-  background: $game-container-background;
-  box-shadow: inset 0 0 0 1px rgba($jaipur-white, .28);
+  overflow: hidden;
+  background-color: $game-container-background;
+  background-image:
+    radial-gradient(circle at 8px 8px, rgba($jaipur-white, .16) 1px, transparent 1px),
+    linear-gradient(135deg, rgba($jaipur-maroon, .16), transparent 44%),
+    linear-gradient(180deg, rgba($jaipur-white, .12), transparent 52%);
+  background-size: 16px 16px, 100% 100%, 100% 100%;
+  box-shadow:
+    inset 0 0 0 1px rgba($jaipur-white, .32),
+    inset 0 -3px 0 rgba($jaipur-maroon, .18),
+    0 5px 14px $jaipur-shadow;
   padding: 15px 25px;
   font-size: $height;
   height: $height;
@@ -98,6 +179,20 @@ h1.title {
   color: $jaipur-white;
   margin-top: 8px;
   text-align: center;
+
+  &:before {
+    content: "";
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $jaipur-blue-pottery;
+    box-shadow:
+      -10px 0 0 rgba($jaipur-blue-pottery, .55),
+      0 -10px 0 rgba($jaipur-blue-pottery, .36);
+  }
 
   &:after {
     position: absolute;
@@ -162,6 +257,24 @@ hr {
 .container {
   width: $field-width;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -48px;
+    right: -38px;
+    left: -38px;
+    height: 38px;
+    background-image:
+      radial-gradient(ellipse 18px 28px at 28px 34px, transparent 56%, rgba($jaipur-maroon, .28) 58%, transparent 62%),
+      radial-gradient(circle at 28px 23px, rgba($jaipur-blue-pottery, .32) 3px, transparent 4px),
+      linear-gradient(90deg, transparent 0 24px, rgba($jaipur-sandstone-deep, .18) 24px 26px, transparent 26px);
+    background-size: 56px 38px;
+    opacity: .75;
+    pointer-events: none;
+  }
 }
 
 @include keyframes(fade-in) {
@@ -177,8 +290,15 @@ hr {
 // Styles for buttons
 @mixin button {
   display: inline-block;
-  background: $jaipur-maroon;
-  box-shadow: inset 0 0 0 1px rgba($jaipur-white, .28);
+  background-color: $jaipur-maroon;
+  background-image:
+    radial-gradient(circle at 8px 8px, rgba($jaipur-white, .14) 1px, transparent 1px),
+    linear-gradient(180deg, rgba($jaipur-pink, .22), transparent 60%);
+  background-size: 16px 16px, 100% 100%;
+  box-shadow:
+    inset 0 0 0 1px rgba($jaipur-white, .3),
+    inset 0 -3px 0 rgba(#3d101b, .28),
+    0 5px 12px $jaipur-shadow;
   border-radius: 3px;
   padding: 0 20px;
   text-decoration: none;
@@ -197,6 +317,8 @@ hr {
   .game-container {
     margin-top: $game-container-margin-top-local;
     position: relative;
+    z-index: 0;
+    isolation: isolate;
     padding: $grid-spacing-local;
 
     cursor: default;
@@ -212,10 +334,20 @@ hr {
 
     background-color: $game-container-background;
     background-image:
-      linear-gradient(45deg, rgba($jaipur-cream, .06) 25%, transparent 25%),
-      linear-gradient(-45deg, rgba($jaipur-cream, .06) 25%, transparent 25%);
-    background-size: 20px 20px;
+      radial-gradient(ellipse 18px 28px at 22px 32px, transparent 56%, rgba($jaipur-maroon, .16) 58%, transparent 62%),
+      radial-gradient(ellipse 18px 28px at 62px 32px, transparent 56%, rgba($jaipur-white, .14) 58%, transparent 62%),
+      radial-gradient(circle at 10px 10px, rgba($jaipur-blue-pottery, .13) 1px, transparent 2px),
+      radial-gradient(circle at 30px 30px, rgba($jaipur-white, .12) 1px, transparent 2px),
+      linear-gradient(45deg, rgba($jaipur-cream, .075) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba($jaipur-maroon, .07) 25%, transparent 25%);
+    background-position: 0 6px, 0 6px, 0 0, 0 0, 0 0, 10px 10px;
+    background-size: 80px 56px, 80px 56px, 40px 40px, 40px 40px, 20px 20px, 20px 20px;
     border-radius: $tile-border-radius-local * 2;
+    box-shadow:
+      inset 0 0 0 2px rgba($jaipur-white, .28),
+      inset 0 0 0 8px rgba($jaipur-sandstone, .16),
+      inset 0 0 0 13px rgba($jaipur-maroon, .08),
+      0 16px 30px rgba($jaipur-maroon, .18);
     width: $field-width-local;
     height: $field-width-local;
     -webkit-box-sizing: border-box;
@@ -230,9 +362,13 @@ hr {
       right: 0;
       bottom: 0;
       left: 0;
-      background: rgba($jaipur-cream, .76);
+      background-color: rgba($jaipur-cream, .82);
+      background-image:
+        radial-gradient(circle at 12px 12px, rgba($jaipur-blue-pottery, .14) 2px, transparent 2px),
+        radial-gradient(circle at 28px 28px, rgba($jaipur-maroon, .09) 1px, transparent 1px);
+      background-size: 40px 40px;
       color: $jaipur-maroon;
-      z-index: 100;
+      z-index: 1000;
 
       text-align: center;
 
@@ -265,7 +401,11 @@ hr {
       @include animation-fill-mode(both);
 
       &.game-won {
-        background: rgba($jaipur-saffron, .72);
+        background-color: rgba($jaipur-saffron, .78);
+        background-image:
+          radial-gradient(circle at 12px 12px, rgba($jaipur-white, .22) 2px, transparent 2px),
+          linear-gradient(135deg, rgba($jaipur-blue-pottery, .1) 25%, transparent 25%);
+        background-size: 36px 36px;
         color: $jaipur-ink;
 
 	a.keep-playing-button {
@@ -278,7 +418,11 @@ hr {
       }
 
       &.game-over {
-        background: rgba($jaipur-maroon, .72);
+        background-color: rgba($jaipur-maroon, .78);
+        background-image:
+          radial-gradient(circle at 12px 12px, rgba($jaipur-white, .14) 2px, transparent 2px),
+          linear-gradient(135deg, rgba($jaipur-indigo, .16) 25%, transparent 25%);
+        background-size: 36px 36px;
         color: $jaipur-white;
       }
     }
@@ -289,10 +433,37 @@ hr {
       top: 8px;
       right: 8px;
       left: 8px;
-      height: 26px;
-      border: 2px solid rgba($jaipur-cream, .28);
+      height: 44px;
+      border: 2px solid $jaipur-arch-line;
       border-bottom: 0;
-      border-radius: 18px 18px 0 0;
+      border-radius: 28px 28px 0 0;
+      background-image:
+        radial-gradient(ellipse 18px 24px at 25px 37px, transparent 56%, rgba($jaipur-white, .34) 58%, transparent 63%),
+        radial-gradient(circle at 25px 28px, rgba($jaipur-blue-pottery, .38) 2px, transparent 3px),
+        linear-gradient(90deg, transparent 0 48px, rgba($jaipur-white, .22) 48px 50px, transparent 50px);
+      background-size: 50px 44px;
+      pointer-events: none;
+      z-index: 0;
+      box-shadow:
+        inset 0 8px 0 rgba($jaipur-white, .06),
+        0 7px 0 -5px rgba($jaipur-maroon, .2),
+        0 18px 0 -16px rgba($jaipur-blue-pottery, .38);
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      left: 15px;
+      height: 8px;
+      border-radius: 999px;
+      background-image:
+        radial-gradient(circle, rgba($jaipur-blue-pottery, .28) 2px, transparent 2px),
+        radial-gradient(circle, rgba($jaipur-white, .25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba($jaipur-maroon, .18), transparent 18%, rgba($jaipur-maroon, .18) 36%, transparent 54%);
+      background-position: 0 0, 8px 0, 0 0;
+      background-size: 16px 8px, 16px 8px, 48px 8px;
       pointer-events: none;
       z-index: 0;
     }
@@ -300,7 +471,7 @@ hr {
 
   .grid-container {
     position: absolute;
-    z-index: 1;
+    z-index: 10;
   }
 
   .grid-row {
@@ -325,7 +496,16 @@ hr {
 
     border-radius: $tile-border-radius-local;
 
-    background: rgba($jaipur-cream, .35);
+    background-color: rgba($jaipur-cream, .38);
+    background-image:
+      radial-gradient(ellipse 16px 20px at 50% 56%, transparent 56%, rgba($jaipur-henna, .13) 58%, transparent 64%),
+      radial-gradient(circle at 50% 38%, rgba($jaipur-blue-pottery, .12) 2px, transparent 3px),
+      linear-gradient(135deg, rgba($jaipur-white, .18), transparent 55%),
+      radial-gradient(circle at 50% 18%, rgba($jaipur-sandstone, .22) 2px, transparent 2px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 18px 18px;
+    box-shadow:
+      inset 0 0 0 1px rgba($jaipur-white, .1),
+      inset 0 6px 14px rgba($jaipur-white, .07);
 
     &:last-child {
       margin-right: 0;
@@ -334,7 +514,7 @@ hr {
 
   .tile-container {
     position: absolute;
-    z-index: 2;
+    z-index: 100;
   }
 
   .tile {
@@ -362,14 +542,25 @@ hr {
 
 .tile {
   position: absolute; // Makes transforms relative to the top-left corner
+  z-index: 100;
 
   .tile-inner {
+    position: relative;
+    display: block;
     border-radius: $tile-border-radius;
 
     background: $tile-color;
+    background-image:
+      radial-gradient(circle at 18% 18%, rgba($jaipur-white, .16) 2px, transparent 3px),
+      radial-gradient(circle at 82% 82%, rgba($jaipur-maroon, .08) 2px, transparent 3px),
+      linear-gradient(135deg, rgba($jaipur-white, .08), transparent 46%);
+    box-shadow:
+      inset 0 0 0 1px rgba($jaipur-white, .16),
+      inset 0 -5px 0 rgba($jaipur-maroon, .06),
+      0 4px 10px rgba($jaipur-maroon, .12);
     text-align: center;
     font-weight: bold;
-    z-index: 10;
+    z-index: 101;
 
     font-size: 55px;
   }
@@ -398,7 +589,11 @@ $jaipur-tile-colors: (
 
   @each $power, $colors in $jaipur-tile-colors {
     &.tile-#{$power} .tile-inner {
-      background: nth($colors, 1);
+      background-color: nth($colors, 1);
+      background-image:
+        radial-gradient(circle at 18% 18%, rgba($jaipur-white, .15) 2px, transparent 3px),
+        radial-gradient(circle at 82% 82%, rgba($jaipur-ink, .08) 2px, transparent 3px),
+        linear-gradient(135deg, rgba($jaipur-white, .1), transparent 45%);
       color: nth($colors, 2);
 
       @if $power >= 128 {
@@ -509,9 +704,16 @@ $jaipur-tile-colors: (
   margin-right: 6px;
   padding: 0 8px;
   border: 0;
-  box-shadow: inset 0 0 0 1px rgba($jaipur-white, .28);
+  box-shadow:
+    inset 0 0 0 1px rgba($jaipur-white, .3),
+    inset 0 -3px 0 rgba(#3d101b, .28),
+    0 5px 12px $jaipur-shadow;
   border-radius: 3px;
-  background: $jaipur-maroon;
+  background-color: $jaipur-maroon;
+  background-image:
+    radial-gradient(circle at 8px 8px, rgba($jaipur-white, .14) 1px, transparent 1px),
+    linear-gradient(180deg, rgba($jaipur-pink, .22), transparent 60%);
+  background-size: 16px 16px, 100% 100%;
   color: $jaipur-white;
   font: inherit;
   font-size: 16px;
@@ -549,6 +751,11 @@ $jaipur-tile-colors: (
   body {
     margin: 20px 0;
     padding: 0 20px;
+
+    &:before,
+    &:after {
+      display: none;
+    }
   }
 
   h1.title {
@@ -559,6 +766,10 @@ $jaipur-tile-colors: (
   .container {
     width: $field-width;
     margin: 0 auto;
+
+    &:before {
+      display: none;
+    }
   }
 
   .score-container, .best-container {
