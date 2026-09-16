@@ -23,3 +23,9 @@ Original prompt: Implement the approved plan.
   uses deeper pink, and `1024` uses deep blue-pottery.
 - Changed only the `2` tile treatment to deep blue-pottery blue with warm cream
   numerals.
+- Re-applied the Jaipur theme as a more intricate style-only pass with
+  jharokha-style side panels, arch friezes, jaali and block-print texture,
+  scalloped board details, and blue-pottery accents.
+- Fixed the decorative board stacking regression by isolating the board
+  stacking context and keeping grid, tiles, tile text, and game messages above
+  pseudo-element decoration.
