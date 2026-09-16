@@ -94,3 +94,14 @@ This branch applies the Jaipur-inspired theme documented in
 `docs/jaipur-theme-template.md`. The tile palette is explicit in
 `$jaipur-tile-colors`; the `2` tile uses `$jaipur-blue-pottery-deep` with
 `$jaipur-white` text.
+
+The intricate Jaipur treatment is CSS-only. It uses Sass pseudo-elements and
+background layers for the desktop jharokha side panels, heading frieze, board
+arches, jaali texture, and blue-pottery details. `GameManager`, `Grid`, `Tile`,
+and the input/storage adapters do not depend on the theme.
+
+The board establishes an isolated stacking context. Decorative
+`.game-container:before` and `.game-container:after` layers sit at `z-index: 0`;
+the grid sits at `z-index: 10`; tiles sit at `z-index: 100`; `.tile-inner`
+content sits at `z-index: 101`; and game messages sit at `z-index: 1000`.
+Those values keep decorative layers from covering tiles or message controls.
