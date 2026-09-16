@@ -208,13 +208,13 @@ flowchart LR
 says to edit Sass sources in `style/` and regenerate CSS instead of hand-editing
 `style/main.css` alone.
 
-The Jaipur theme is layered in CSS:
+The AU Bank-inspired theme is layered in CSS:
 
 ```text
-body pseudo-elements          desktop jharokha side panels
-container pseudo-element      small arch frieze above the game
-game-container background     sandstone, jaali, and block-print texture
-game-container pseudo-layers  board arch and blue-pottery bottom detail
+body pseudo-elements          desktop sun-ring side panels
+container pseudo-element      orange and purple progress band above the game
+game-container background     deep purple banking panel with orange rail
+game-container pseudo-layers  rising-sun accent and bottom progress stripe
 grid-container                empty board cells
 tile-container                moving tiles and tile numbers
 game-message                  win and game-over overlays
