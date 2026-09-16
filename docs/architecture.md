@@ -90,15 +90,15 @@ the same target. If a stored game contains a stale or invalid target,
 The visual system is defined in Sass under `style/`. The browser loads
 `style/main.css`, which is generated from `style/main.scss`.
 
-This branch applies the Jaipur-inspired theme documented in
-`docs/jaipur-theme-template.md`. The tile palette is explicit in
-`$jaipur-tile-colors`; the `2` tile uses `$jaipur-blue-pottery-deep` with
-`$jaipur-white` text.
+This branch applies the AU Bank-inspired theme documented in
+`docs/au-bank-theme-template.md`. The tile palette is explicit in
+`$au-tile-colors`; the `2` tile uses `$au-orange-strong` with `$au-white` text.
 
-The intricate Jaipur treatment is CSS-only. It uses Sass pseudo-elements and
-background layers for the desktop jharokha side panels, heading frieze, board
-arches, jaali texture, and blue-pottery details. `GameManager`, `Grid`, `Tile`,
-and the input/storage adapters do not depend on the theme.
+The AU Bank treatment is CSS-only. It uses Sass pseudo-elements and background
+layers for desktop sun-ring side panels, heading and container progress bands,
+the purple board surface, orange action rails, and rising-sun board accents.
+`GameManager`, `Grid`, `Tile`, and the input/storage adapters do not depend on
+the theme.
 
 The board establishes an isolated stacking context. Decorative
 `.game-container:before` and `.game-container:after` layers sit at `z-index: 0`;
