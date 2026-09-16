@@ -10,11 +10,11 @@ The official app can also be found on the [Play Store](https://play.google.com/s
 This branch keeps the original 4x4 gameplay and adds a selectable winning
 target. Players can choose `512`, `1024`, or `2048`; `2048` remains the default.
 
-It also applies an intricate Jaipur-inspired visual theme with cream and
-sandstone surfaces, maroon and indigo controls, block-print and jaali texture,
-jharokha-style side panels, scalloped arch details, and a deep blue-pottery `2`
-tile with warm cream text. Decorative layers are kept below the grid and tile
-layers so the game remains readable.
+It also applies a polished AU Bank-inspired visual theme with strong orange,
+deep purple, clean white surfaces, rising-sun arcs, progress-band accents, and
+compact banking-style score and control panels. The `2` tile uses strong AU
+Bank orange with a high-contrast white number. Decorative layers are kept below
+the grid and tile layers so the game remains readable.
 
 ### Contributions
 
@@ -49,6 +49,7 @@ For local setup, architecture notes, testing, and safe-change guidance, see:
  - [Architecture](docs/architecture.md)
  - [Testing](docs/testing.md)
  - [Safe changes](docs/safe-changes.md)
+ - [AU Bank theme template](docs/au-bank-theme-template.md)
  - [Final review notes](docs/final-review.md)
 
 ## License
